@@ -158,10 +158,12 @@ two elements might be serialized as the string
 For this oversimplified serialization function, you may assume that
 the string will be made up of alphanumeric characters only.
 ......................................................................*)
-
-module IntStringStack = MakeStack (struct
-                                    type t = (int * string)
-                                    let serialize (n, s) = "(" ^ string_of_int n ^ ", " ^ s ^ ")"
-                                  end) ;;
+module IntStringSerialize =
+  struct
+    type t = (int * string)
+    let serialize (n, s) =
+      "(" ^ string_of_int n ^ ", " ^ s ^ ")"
+  end ;;
+module IntStringStack = MakeStack (IntStringSerialize) ;;
 
 
